@@ -118,7 +118,7 @@ public class PlayerTest {
         }
     }
 
-    protected void assertEquals(String name, double expected, double actual) {
+    protected void assertEquals(String name, float expected, float actual) {
         if(Math.abs(expected - actual) < .00001) {
             throw new RuntimeException(name + ": Assert equals failed"
                     + " expected = " + expected

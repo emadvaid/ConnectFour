@@ -8,25 +8,32 @@ public class Player {
     private int nwins;
 
     public Player(String name) {
-        this.name    = name;
+        this.name = name;
         this.nplayed = 0;
-        this.nwins   = 0;
+        this.nwins = 0;
     }
 
     public void addWin() {
         nwins++;
-    }
-
+        nplayed++;}
     public void addLoss() {
-        nwins--;
+        nwins=0;
+        nplayed++;
     }
 
     public float getWinRatio() {
-        return getWins()/getTotalGamesPlayed();
+        if (nplayed != 0.0F) {
+            return nwins/nplayed;
+        } else
+            return 0.0F;
     }
 
     public float getLossRatio() {
-        return getTotalGamesPlayed() - getWins()/ getTotalGamesPlayed();
+
+        if (nplayed != 0) {
+            return nwins - nplayed / nplayed;
+        }
+        return 0.0F;
     }
 
     public String getName() {
@@ -34,7 +41,7 @@ public class Player {
     }
 
     public int getWins() {
-        return nwins;
+        return nwins ;
     }
 
     public int getTotalGamesPlayed() {
