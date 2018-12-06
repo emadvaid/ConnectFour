@@ -15,6 +15,8 @@ public class GameBoard {
     private final int ncols;
     private final char board[][];
 
+
+
     public GameBoard(int nrows, int ncols) {
         this.nrows = nrows;
         this.ncols = ncols;
@@ -25,8 +27,20 @@ public class GameBoard {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 board[i][j] = EMPTY;
+
             }
         }
+    }
+     public void  Print() {
+        PrintStream gameboard  = new PrintStream(System.out);
+         for (int i = 0; i < board.length; i++) {
+             for (int j = 0; j < board[i].length; j++) {
+                 board[i][j] = EMPTY;
+                 gameboard.print(GameBoard.EMPTY);
+
+             }
+         }
+
     }
 
 }
