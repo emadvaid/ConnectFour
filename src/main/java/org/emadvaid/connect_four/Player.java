@@ -15,15 +15,18 @@ public class Player {
 
     public void addWin() {
         nwins++;
-        nplayed++;}
-    public void addLoss() {
-        nwins=0;
         nplayed++;
     }
 
+    public void addLoss() {
+       nplayed++;
+    }
+
     public float getWinRatio() {
+
+
         if (nplayed != 0.0F) {
-            return nwins/nplayed;
+            return ((float)nwins)/nplayed;
         } else
             return 0.0F;
     }
@@ -31,7 +34,8 @@ public class Player {
     public float getLossRatio() {
 
         if (nplayed != 0) {
-            return nwins - nplayed / nplayed;
+            int loss = nplayed - nwins;
+            return  ((float)loss) /nplayed;
         }
         return 0.0F;
     }

@@ -1,8 +1,6 @@
 package org.emadvaid.connect_four;
 
-public class PlayerTest {
-
-    private static int fails;
+public class PlayerTest extends TestCase {
 
     /*
      *  Test case that test creating a player object.
@@ -86,7 +84,40 @@ public class PlayerTest {
         assertEquals("after 4 losses - player1.getLossRatio()", 1.0, player1.getLossRatio());
     }
 
-    public static void main(String args[]){
+    public void testAddWinsAndLossToPlayer() {
+        // create a new instance of the Player Class (creating an object of type ...),
+        //   and save it to a variable named player1 of type Player
+        Player player1 = new Player("Player1");
+
+        assertNotNull("player1", player1 == null);
+        assertEquals("player1.getName()","Player1", player1.getName());
+
+        player1.addLoss();
+        assertEquals("after 1 loss - player1.getWins()",              0   , player1.getWins());
+        assertEquals("after 1 loss - player1.getTotalGamesPlayed()" , 1, player1.getTotalGamesPlayed());
+        assertEquals("after 1 loss - player1.getWinRatio()",        0.0, player1.getWinRatio());
+        assertEquals("after 1 loss - player1.getLossRatio()", 1.0, player1.getLossRatio());
+
+        player1.addWin();
+        assertEquals("after 1 loss and 1 win - player1.getWins()", 1, player1.getWins());
+        assertEquals("after 1 loss and 1 win - player1.getTotalGamesPlayed()", 2, player1.getTotalGamesPlayed());
+        assertEquals("after 1 loss and 1 win - player1.getWinRatio()", 0.5, player1.getWinRatio());
+        assertEquals("after 1 loss and 1 win - player1.getLossRatio()", 0.5, player1.getLossRatio());
+
+        player1.addLoss();
+        assertEquals("after 2 losses and 1 win - player1.getWins()", 1, player1.getWins());
+        assertEquals("after 2 losses and 1 win - player1.getTotalGamesPlayed()", 3, player1.getTotalGamesPlayed());
+        assertEquals("after 2 losses and 1 win - player1.getWinRatio()", 0.3333, player1.getWinRatio());
+        assertEquals("after 2 losses and 1 win - player1.getLossRatio()", 0.6666, player1.getLossRatio());
+
+        player1.addWin();
+        assertEquals("after 2 losses and 2 wins - player1.getWins()", 2, player1.getWins());
+        assertEquals("after 2 losses and 2 wins - player1.getTotalGamesPlayed()", 4, player1.getTotalGamesPlayed());
+        assertEquals("after 2 losses and 2 wins - player1.getWinRatio()", 0.5, player1.getWinRatio());
+        assertEquals("after 2 losses and 2 wins - player1.getLossRatio()", 0.5, player1.getLossRatio());
+    }
+
+    public static boolean run(){
 
         // create two counters to keep track of the number of passed test,
         //   and the number of tests taken
@@ -137,54 +168,25 @@ public class PlayerTest {
             System.out.println("\t" + e);
         }
 
+        // Step 4 - run the testAddLossToPlayer test, on the tester object
+        try {
+            // first increment test counter
+            nTests++;
+            // run the test
+            System.out.println("Running testAddWinsAndLossToPlayer:");
+            tester.testAddWinsAndLossToPlayer();
+            // update the pass counter
+            nPassed++;
+        } catch(Exception e) {
+            System.out.println("\t" + e);
+        }
+
         if(nTests == nPassed) {
             System.out.println("All test passed");
+            return true;
         } else {
             System.out.println("Failed " + (nTests - nPassed) + " tests out of " + nTests);
-        }
-    }
-
-    protected void assertNotNull(String name, Object o) {
-        if(o == null) {
-            throw new RuntimeException(name + ": Assert not Null failed on test object: " + o);
-        }
-    }
-
-    protected void assertNull(String name, Object o) {
-        if(o != null) {
-            throw new RuntimeException(name + ": Assert Null failed on test object: " + o);
-        }
-    }
-
-    protected void assertEquals(String name, double expected, double actual) {
-        if(Math.abs(expected - actual) > .00001) {
-            throw new RuntimeException(name + ": Assert equals failed"
-                    + " expected = " + expected
-                    + " actual = " + actual);
-        }
-    }
-
-    protected void assertEquals(String name, float expected, float actual) {
-        if(Math.abs(expected - actual) > .00001) {
-            throw new RuntimeException(name + ": Assert equals failed"
-                    + " expected = " + expected
-                    + " actual = " + actual);
-        }
-    }
-
-    protected void assertEquals(String name, int expected, int actual) {
-        if(expected != actual) {
-            throw new RuntimeException(name + ": Assert equals failed"
-                    + " expected = " + expected
-                    + " actual = " + actual);
-        }
-    }
-
-    protected void assertEquals(String name, Object expected, Object actual) {
-        if(!expected.equals(actual)) {
-            throw new RuntimeException(name + ": Assert equals failed"
-                    + " expected = " + expected
-                    + " actual = " + actual);
+            return false;
         }
     }
 }
